@@ -53,4 +53,53 @@ updateUser({ params, body }, res) {
     .catch(err => res.json(err));
 },
 
+deleteUser({ params }, res) {
+    Thought.deleteMany({ userId: params.id })
+    .then(() => {
+        User.findOneAndDelete({ userId: params.id })
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.stauts(404).json({ message: 'No User found with this ID!' });
+                return;
+            }
+            res.json(dbUserData);
+        });
+    })
+    .catch(err => res.json(err));
+},
+
+addFriend({ params }, res) {
+    User.findOneAndUpdate(
+        { _id: params.userId },
+        { $push: { friends: params.friendId } },
+        { new: true }
+    )
+    .then((dbUserData) => {
+        if (!dbUserData) {
+            res.status(404).json({ message: 'No User found with this ID!' });
+            return;
+        }
+        res.json(dbUserData);
+    })
+    .catch((err) => res.status(400).json(err));
+},
+
+deleteFriend({ params }, res) {
+    User.findOneAndUpdate(
+        { _id: params.userId },
+        { $pull: { friends: params.friendId } },
+        { new: true }
+    )
+    .then((dbUserData) => {
+        if (!dbUserData) {
+            res.status(404).json({ message: 'No User found with this ID!' });
+            return;
+        }
+        res.json(dbUserData);
+    })
+    .catch((err) => res.status(400).json(err));
 }
+
+};
+
+module.exports = userController
