@@ -36,6 +36,10 @@
   ## [Credits](#table-of-contents)
 
   This is a challenge assignment for the Georgia Tech Coding Bootcamp so no contributions are needed.
+  
+  Links:
+  * MongoDB Documentation: https://www.mongodb.com/docs/
+  * Moment.js: https://stackoverflow.com/questions/31475312/compare-date-moment-js-in-mongodb
 
   
   ## [License](#table-of-contents)
