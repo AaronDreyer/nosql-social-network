@@ -42,7 +42,7 @@ createUser({ body }, res) {
 },
 
 updateUser({ params, body }, res) {
-    User.findOneandUpdate({ _id: params.userId }, body, { new: true, runValidators: true })
+    User.findOneAndUpdate({ _id: params.userId }, body, { new: true, runValidators: true })
     .then(dbUserData => {
         if (!dbUserData) {
             res.status(404).json({ message: 'No User found with this ID!' });
@@ -54,7 +54,7 @@ updateUser({ params, body }, res) {
 },
 
 deleteUser({ params }, res) {
-    Thought.deleteMany({ userId: params.userId })
+    Thought.deleteMany({ _id: params.userId })
     .then(() => {
         User.findOneAndDelete({ userId: params.userId })
         .then(dbUserData => {
