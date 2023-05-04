@@ -24,7 +24,7 @@ getSingleUser({ params }, res) {
     })
     .then(dbUserData => {
         if (!dbUserData) {
-            res.stauts(404).json({ message: 'No User found with this ID!' });
+            res.status(404).json({ message: 'No User found with this ID!' });
             return;
         }
         res.json(dbUserData);
@@ -59,7 +59,7 @@ deleteUser({ params }, res) {
         User.findOneAndDelete({ userId: params.id })
         .then(dbUserData => {
             if (!dbUserData) {
-                res.stauts(404).json({ message: 'No User found with this ID!' });
+                res.status(404).json({ message: 'No User found with this ID!' });
                 return;
             }
             res.json(dbUserData);
