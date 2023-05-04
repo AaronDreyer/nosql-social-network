@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 const moment = require('moment');
 
+// Model for Users
 const userSchema = new Schema(
     {
         username: {
@@ -15,12 +16,14 @@ const userSchema = new Schema(
             unique: true,
             match: /.+\@.+\..+/,
         },
+        // Thoughts model borught in based on user ID
         thoughts: [
             {
             type: Schema.Types.ObjectId,
             ref: 'Thought'
             }
         ],
+        // Friends do not require separate model like reactions
         friends: [ 
             {
             type: Schema.Types.ObjectId,
@@ -36,6 +39,7 @@ const userSchema = new Schema(
     }
 );
 
+// Connection user schema to friends
 userSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });

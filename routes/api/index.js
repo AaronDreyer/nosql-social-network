@@ -1,3 +1,4 @@
+// Establishing thoughts and users routes from /api
 const router = require('express').Router();
 const thoughtsRoutes = require('./thoughtsRoutes');
 const userRoutes = require('./userRoutes');

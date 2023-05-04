@@ -1,4 +1,5 @@
 const router = require('express').Router();
+// Creating all routes based from CRUD operations for users, ID, and friends
 const {
     getUsers,
     getSingleUser,
@@ -9,6 +10,8 @@ const {
     deleteFriend
 } = require('../../controllers/userController');
 
+// Estblishing Route paths for each of the routes above
+// Created individually based on the different combination of routes
 router
     .route('/')
     .get(getUsers)

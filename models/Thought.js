@@ -1,6 +1,9 @@
+// Using mongoose to establish schema, model, and types of data
 const { Schema, model, Types } = require('mongoose');
+// Requiring moment.js for time stamp
 const moment = require('moment');
 
+// Model for Reactions
 const reactionSchema = new Schema(
     {
         reactionId: {
@@ -17,6 +20,7 @@ const reactionSchema = new Schema(
             required: true
         },
         createdAt: {
+            // Moment.js used to create time stamp
             type: Date,
             default: Date.now,
             get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
@@ -31,6 +35,7 @@ const reactionSchema = new Schema(
         }
 );
 
+// Model for Thoughts
 const thoughtsSchema = new Schema(
     {
         thoughtText: {
@@ -40,6 +45,7 @@ const thoughtsSchema = new Schema(
             maxLength: 280,
         },
         createdAt: {
+            // Moment.js time stamp
             type: Date,
             default: Date.now,
             get: createdAtVal => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
@@ -59,6 +65,7 @@ const thoughtsSchema = new Schema(
     }
 );
 
+// Connection thoughts schema to reactions
 thoughtsSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 });
